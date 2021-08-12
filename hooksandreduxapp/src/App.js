@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-
-// 主目的：name, priceではなくstate1つで管理する
+import React, { useEffect, useState } from 'react';
 
 const App = props => {
+  // 今更だが、初期値かしたpropsをstateに割り当てているだけ。
   const [state, setState] = useState(props);
-  // オブジェクト方式で渡す　理由：オブジェクトで渡しているから。
   const { name, price } = state;
 
-  // spread構文を利用することで、そのほかの引数は値をそのままにできる。（公式DOC解説より）
+  // 入門useEffect
+  useEffect(() => {console.log('this is called EveryTime'); });
+  // 空の配列を渡すと1回だけレンダー後に呼び出される。
+  useEffect(() => {console.log('this is called 1 time.')}, []);
+  useEffect(() => {console.log('this is called on changing input name')}, [name]);
+  useEffect(() => {console.log('this is called on changing price.')}, [price]);
+
   return (
   <>
     <p>現在の{name}は{price}円です。</p>
