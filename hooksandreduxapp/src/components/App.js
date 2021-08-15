@@ -12,8 +12,10 @@ import AppContext from '../contexts/AppContext';
 // ④変数の状態の見通しをよくするため、contexで置き換え。
 
 const App = () => {
-
-  const [state, dispatch] = useReducer(reducer, []); 
+  const initialState = {
+    events: []
+  }
+  const [state, dispatch] = useReducer(reducer, initialState); 
   const value = useContext(AppContext);
   return(
     // AppContextをimportする
