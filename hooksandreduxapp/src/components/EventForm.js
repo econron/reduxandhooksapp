@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { 
   CREATE_EVENT, 
   DELETE_ALL_EVENTS, 
 } 
 from '../actions';
-// 引数として渡す場合、{}　の中に値を渡していく。
-const EventForm = ({ state, dispatch }) => {
 
-    // useReducerを呼び出した時点で初期化されている。
-    // よって、app.jsで呼び出しても値が生成されない。
-    // 同じstateを参照するように改修する。
-    // const [state, dispatch] = useReducer(reducer, []); 
+import AppContext from '../contexts/AppContext';
+import App from './App';
+
+// 引数として渡す場合、{}　の中に値を渡していく。
+const EventForm = () => {
+  // useContext関数によって、受け取ったstateとdispatchを再現する。
+    const { state, dispatch } = useContext(AppContext);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const addEvent = e => {
