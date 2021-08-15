@@ -3,8 +3,11 @@ import React, { useState, useContext } from 'react';
 import { 
   CREATE_EVENT, 
   DELETE_ALL_EVENTS, 
+  ADD_OPERATION_LOG,
+  DELETE_ALL_OPERATION_LOGS
 } 
 from '../actions';
+import { timeCurrentIso8601 } from '../utils';
 
 import AppContext from '../contexts/AppContext';
 import App from './App';
@@ -18,11 +21,17 @@ const EventForm = () => {
     const addEvent = e => {
         e.preventDefault();
         dispatch({
-        // reducerのactionに渡す引数一覧
-        // typeは必須
-        type: CREATE_EVENT,
-        title,
-        body
+          // reducerのactionに渡す引数一覧
+          // typeは必須
+          type: CREATE_EVENT,
+          title,
+          body
+        });
+
+        dispatch({
+          type: ADD_OPERATION_LOG,
+          description: 'イベントを作成しました。',
+          operatedAt: timeCurrentIso8601
         });
 
         // stateに配列として保存後、表示する値を初期化。
@@ -35,6 +44,11 @@ const EventForm = () => {
         e.preventDefault();
         dispatch({
           type: DELETE_ALL_EVENTS
+        });
+        dispatch({
+          type: ADD_OPERATION_LOG,
+          description: '全てのイベントを削除しました。',
+          operatedAt: timeCurrentIso8601
         });
     };
 
