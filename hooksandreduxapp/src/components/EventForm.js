@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-
+import { 
+  CREATE_EVENT, 
+  DELETE_ALL_EVENTS, 
+} 
+from '../actions';
 // 引数として渡す場合、{}　の中に値を渡していく。
 const EventForm = ({ state, dispatch }) => {
 
@@ -15,7 +19,7 @@ const EventForm = ({ state, dispatch }) => {
         dispatch({
         // reducerのactionに渡す引数一覧
         // typeは必須
-        type: 'CREATE_EVENT',
+        type: CREATE_EVENT,
         title,
         body
         });
@@ -29,7 +33,7 @@ const EventForm = ({ state, dispatch }) => {
     const deleteAllEvents = e => {
         e.preventDefault();
         dispatch({
-          type: 'DELETE_ALL_EVENTS'
+          type: DELETE_ALL_EVENTS
         });
     };
 

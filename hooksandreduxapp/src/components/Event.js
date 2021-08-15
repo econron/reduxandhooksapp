@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { DELETE_EVENT } from '../actions';
+
 const Event = ({ event, dispatch }) => {
     const id = event.id;
     const handleClickDeleteButton = () => {
-        dispatch({ type: 'DELETE_EVENT', id });
+        dispatch({ type: DELETE_EVENT, id });
     };
     return(
         <tr>
